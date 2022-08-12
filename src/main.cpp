@@ -11,7 +11,7 @@ int nextDirection = 1;
 int rotationSlider = 5;
 int rotationCamera = 1;
 float speedFactor = 1;
-Boolean hit = false;
+boolean hit = false;
 
 void setup(){
   //Steppermotorsetup
