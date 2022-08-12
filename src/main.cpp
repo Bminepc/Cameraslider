@@ -47,6 +47,7 @@ void loop(){
   stepperSlider.setSpeedRPM(100 * speedFactor);
   stepperCamera.rotate(direction * rotationCamera);
   stepperSlider.rotate(direction * rotationSlider);
+  delay(1);
 }
 
 /*
