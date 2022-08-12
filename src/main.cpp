@@ -1,5 +1,14 @@
 #include <AH_EasyDriver.h>
 
+//Webserver
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include "webpage.h"
+
+const char* ssid = "Cameraslider";
+const char* password = "1234567890";
+AsyncWebServer server(80);
+
 #define TasterLeft 19
 #define TasterRight 18
 
@@ -14,6 +23,25 @@ float speedFactor = 1;
 boolean hit = false;
 
 void setup(){
+  // WiFi Station initialisation
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.println("");
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(100);
+    Serial.print(".");
+  }
+  Serial.print("Station IP address = ");
+  Serial.println(WiFi.localIP());
+
+  // HTTP server
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
+    request->send_P(200, "text/html", html);
+  });
+  server.begin();
+  Serial.println("HTTP server started!");
+  
   //Steppermotorsetup
   stepperCamera.enableDriver();
   Serial.begin(9600);
@@ -49,32 +77,3 @@ void loop(){
   stepperSlider.rotate(direction * rotationSlider);
   delay(1);
 }
-
-/*
-void loop(){
-    if(digitalRead(TasterLeft) == HIGH){
-      direction = 1;
-      speedFactor = 0.1;
-    }else if(digitalRead(TasterRight) == HIGH){
-      direction = -1;
-      speedFactor = 0.1;
-    }
-
-    stepperCamera.setSpeedRPM(100 * speedFactor);
-    stepperSlider.setSpeedRPM(100 * speedFactor);
-    stepperCamera.rotate(direction * rotationCamera);
-    stepperSlider.rotate(direction * rotationSlider);
-
-    if(speedFactor < 1){
-      speedFactor = speedFactor + 0.005;
-      Serial.println(speedFactor);
-    }
-    delay(1);
-}
-*/
-
-
-/*
-  stepperCamera.rotate(1);
-  stepperSlider.rotate(1);
-*/
