@@ -41,6 +41,7 @@ void loop(){
       afterTurn = afterTurn + 0.001;
       Serial.println(afterTurn);
     }
+    delay(1);
 }
 
 
