@@ -23,6 +23,7 @@ float speedFactor = 1;
 boolean hit = false;
 
 void setup(){
+Serial.begin(115200);
   // WiFi Station initialisation
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
@@ -41,10 +42,9 @@ void setup(){
   });
   server.begin();
   Serial.println("HTTP server started!");
-  
+
   //Steppermotorsetup
   stepperCamera.enableDriver();
-  Serial.begin(9600);
   stepperCamera.setSpeedRPM(100);
   stepperSlider.setSpeedRPM(100);
 
