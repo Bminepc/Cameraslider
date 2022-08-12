@@ -33,7 +33,7 @@ class AH_EasyDriver {
 
     void setSpeedRPM(int RPM);
     void setSpeedHz(int FREQ);
-    void setSpeedMax(); 
+    void setSpeedMax();
     void setMicrostepping(int MODE);
 
     void enableDriver();
@@ -74,10 +74,8 @@ class AH_EasyDriver {
     int SLP_pin;
     int ENABLE_pin;
     int RST_pin;
-	
+
 
 };
 
 #endif
-
- 
