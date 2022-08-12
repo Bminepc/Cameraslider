@@ -16,10 +16,8 @@ void setup(){
 }
 
 void loop(){
-  for (size_t i = 0; i < 360; i++) {
     if(digitalRead(TasterH) != HIGH){
     stepperH.rotate(1);
     stepperV.rotate(1);
     }
-  }
 }
