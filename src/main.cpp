@@ -23,19 +23,13 @@ float speedFactor = 1;
 boolean hit = false;
 
 void setup(){
-Serial.begin(115200);
+  Serial.begin(115200);
   // WiFi Station initialisation
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  Serial.println("");
-  // Wait for connection
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(100);
-    Serial.print(".");
-  }
-  Serial.print("Station IP address = ");
-  Serial.println(WiFi.localIP());
+  Serial.print("Setting soft-AP ... ");
+  Serial.println(WiFi.softAP("ESPsoftAP_01") ? "Ready" : "Failed!");
 
+  Serial.print("Soft-AP IP address = ");
+  Serial.println(WiFi.softAPIP());
   // HTTP server
   server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send_P(200, "text/html", html);
