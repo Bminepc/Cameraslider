@@ -38,7 +38,7 @@ void loop(){
     stepperSlider.rotate(direction * rotationSlider);
 
     if(afterTurn < 1){
-      afterTurn = afterTurn + 0.02;
+      afterTurn = afterTurn + 0.001;
       Serial.println(afterTurn);
     }
 }
