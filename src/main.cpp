@@ -33,6 +33,7 @@ void loop(){
     }
     if(afterTurn < 1){
       afterTurn = afterTurn + 0.1;
+      Serial.print(afterTurn);
     }
 
     stepperCamera.setSpeedRPM(100 * afterTurn);
