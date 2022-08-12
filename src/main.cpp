@@ -1,23 +1,41 @@
 #include <AH_EasyDriver.h>
 
-#define TasterH 19
+#define TasterLeft 19
+#define TasterRight
 
-AH_EasyDriver stepperH(200,14,12,27,26,28);
-AH_EasyDriver stepperV(200,32,33,27,26,28);
+AH_EasyDriver stepperCamera(200,14,12,27,26,28);
+AH_EasyDriver stepperSlider(200,32,33,27,26,28);
 
-
+int direction = 1;
+int rotationSlider = 5;
+int rotationCamera = 1;
 
 void setup(){
+  //Steppermotorsetup
   stepperH.enableDriver();
   Serial.begin(9600);
-  stepperH.setSpeedRPM(100);
-  stepperV.setSpeedRPM(100);
-  pinMode(TasterH, INPUT);
+  stepperCamera.setSpeedRPM(100);
+  stepperSlider.setSpeedRPM(100);
+
+  //Endtaster
+  pinMode(TasterLeft, INPUT);
+  pinMode(TasterRight, INPUT);
 }
 
 void loop(){
-    if(digitalRead(TasterH) != HIGH){
-    stepperH.rotate(1);
-    stepperV.rotate(1);
+    if(digitalRead(TasterLeft) == HIGH){
+      direction = 1;
+    }else if(digitalRead(TasterRight) == HIGH){
+      direction = -1;
     }
+
+    stepperCamera.rotate(direction * rotationCamera);
+    stepperSlider.rotate(direction * rotationSlider);
 }
+
+
+
+/*
+  stepperCamera.rotate(1);
+  stepperSlider.rotate(1);
+*/
