@@ -26,7 +26,7 @@ void setup(){
   Serial.begin(115200);
   // WiFi Station initialisation
   Serial.print("Setting soft-AP ... ");
-  Serial.println(WiFi.softAP("ESPsoftAP_01") ? "Ready" : "Failed!");
+  Serial.println(WiFi.softAP("Cameraslider") ? "Ready" : "Failed!");
 
   Serial.print("Soft-AP IP address = ");
   Serial.println(WiFi.softAPIP());
