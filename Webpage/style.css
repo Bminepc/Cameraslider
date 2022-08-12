@@ -1,0 +1,16 @@
+body{
+  background-color: black;
+  color: lightgreen;
+  text-align: center;
+}
+
+.Bottom{
+  background-color: gray;
+  margin-bottom: 0px;
+  color: black;
+}
+
+.Emergency{
+  background-color: red;
+  color: white;
+}
