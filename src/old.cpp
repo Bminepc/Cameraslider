@@ -16,16 +16,5 @@ void loop(){
     stepperH.rotate(1);
     stepperV.rotate(1);
   }
-  Serial.println(analogRead(17));
-
-  stepperH.rotate(360);
-  stepperV.rotate(360);
-
-
-  delay(1000);
-
-  stepperH.rotate(-360);
-  stepperV.rotate(-360);
-
   delay(1000);
 }
