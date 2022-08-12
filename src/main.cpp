@@ -9,6 +9,7 @@ AH_EasyDriver stepperSlider(200,32,33,27,26,28);
 int direction = 1;
 int rotationSlider = 5;
 int rotationCamera = 1;
+int afterTurn = 1;
 
 void setup(){
   //Steppermotorsetup
@@ -25,10 +26,17 @@ void setup(){
 void loop(){
     if(digitalRead(TasterLeft) == HIGH){
       direction = 1;
+      afterTurn = 0.1;
     }else if(digitalRead(TasterRight) == HIGH){
       direction = -1;
+      afterTurn = 0.1;
     }
-
+    if(afterTurn < 1){
+      afterTurn = afterTurn + 0.1;
+    }
+    
+    stepperCamera.setSpeedRPM(100 * afterTurn);
+    stepperSlider.setSpeedRPM(100 * afterTurn);
     stepperCamera.rotate(direction * rotationCamera);
     stepperSlider.rotate(direction * rotationSlider);
 }
