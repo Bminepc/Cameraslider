@@ -4,7 +4,7 @@ AH_EasyDriver stepperV(200,32,33,27,26,28);
 void setup(){
   stepperH.resetDriver();
   stepperH.enableDriver();
-  stepperH.setMicrostepping(0);/
+  stepperH.setMicrostepping(0);
   Serial.begin(9600);
   stepperH.setSpeedRPM(100);
   stepperV.setSpeedRPM(100);
@@ -27,11 +27,11 @@ void loop(){
   stepperH.rotate(-360);
   stepperV.rotate(-360);
 
-  delay(1000);/
+  delay(1000);
 }
 
 
-/
+
 int Schrittmotor=12; // Pin 8 an „Step“
 int Richtung = 14; // Pin7 an „Dir“
 int MODE1 = 27;
