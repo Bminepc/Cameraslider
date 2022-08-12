@@ -18,7 +18,7 @@ void loop(){
   }
   Serial.println(analogRead(17));
 
-  /stepperH.rotate(360);
+  stepperH.rotate(360);
   stepperV.rotate(360);
 
 
@@ -28,33 +28,4 @@ void loop(){
   stepperV.rotate(-360);
 
   delay(1000);
-}
-
-
-
-int Schrittmotor=12; // Pin 8 an „Step“
-int Richtung = 14; // Pin7 an „Dir“
-int MODE1 = 27;
-int MODE2 = 26;
-
-void setup()
-{
-  Serial.begin(9600);
-  pinMode(MODE1, OUTPUT);
-  pinMode(MODE2, OUTPUT);
-  pinMode(Schrittmotor, OUTPUT);
-  pinMode(Richtung, OUTPUT);
-  digitalWrite(Richtung, HIGH);
-  digitalWrite(MODE1, HIGH);
-  digitalWrite(MODE2, HIGH);
-}
-
-void loop()
-{
-  Serial.println("LOW");
-  digitalWrite(Schrittmotor, HIGH);
-  //delay(100);
-  Serial.println("HIGH");
-  digitalWrite(Schrittmotor, LOW);
-  //delay(100);
 }
