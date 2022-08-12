@@ -4,7 +4,7 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include "webpage.h"
-#include <ArduinoJSON.h>
+#include <ArduinoJson.h>
 #include <WebSocketsServer.h>
 
 const char* ssid = "Cameraslider";

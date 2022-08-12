@@ -50,7 +50,6 @@ function start(){
 
 // Check WebSocket connection
 function check(){
-  document.getElementById("READY_STATE").innerHTML = connection.readyState;
   if(!connection || connection.readyState == 3)
     start();
 }

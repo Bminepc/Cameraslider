@@ -23,12 +23,12 @@ const char html[] PROGMEM = R"=====(
       }
       </style>
       <script language="JavaScript">
-    'use strict'
-    var ip = location.host;
-    var connection = null;
+  'use strict'
+  var ip = location.host;
+  var connection = null;
 
-    // Setup EventListener
-    document.addEventListener('DOMContentLoaded', function() {
+  // Setup EventListener
+  document.addEventListener('DOMContentLoaded', function() {
     const stop = document.querySelector("#stop");
 
     stop.addEventListener("click", function () {
@@ -40,8 +40,8 @@ const char html[] PROGMEM = R"=====(
 
     });
 
-    // Setup WebSocket connection
-    function start(){
+  // Setup WebSocket connection
+  function start(){
     if (connection != null)
       connection = null;;
     connection=new WebSocket("ws://"+ip+":81");
@@ -64,19 +64,18 @@ const char html[] PROGMEM = R"=====(
 
     connection.onmessage = function(e){
     };
-    }
+  }
 
-    // Check WebSocket connection
-    function check(){
-    document.getElementById("READY_STATE").innerHTML = connection.readyState;
+  // Check WebSocket connection
+  function check(){
     if(!connection || connection.readyState == 3)
       start();
-    }
+  }
 
 
-    // Send new LED1 state to server
-    function sendLED1(Value)
-    {
+  // Send new LED1 state to server
+  function sendLED1(Value)
+  {
     if (connection == null){
       window.alert("Keine verbindung");
       return;
@@ -87,8 +86,8 @@ const char html[] PROGMEM = R"=====(
     msg.action = "request";
     msg.stop = Value;   // State of the LED
     connection.send(JSON.stringify(msg));
-    }
-    </script>
+  }
+  </script>
     </head>
     <body>
       <div class="Top">
@@ -106,6 +105,5 @@ const char html[] PROGMEM = R"=====(
         © Bminepc & DasRudeltier 2022
       </div>
     </body>
-    </html>
-
+  </html>
 )=====";
