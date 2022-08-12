@@ -63,6 +63,7 @@ void setup(){
 }
 
 void loop(){
+  webSocket.loop();
   if(Timeout < 1){
     if(digitalRead(TasterLeft) == HIGH){
       hit = true;

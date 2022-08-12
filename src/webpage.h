@@ -96,7 +96,7 @@ const char html[] PROGMEM = R"=====(
         <h2>By DasRudeltier and Bminepc</h2>
       </div>
       <div class="Settings">
-        <button type="button" name="Stop" class="Emergency" id="stop">STOP</button>
+        <button name="Stop" class="Emergency" id="stop">STOP</button>
       </div>
       <div class="Data">
 
