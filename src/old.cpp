@@ -13,8 +13,8 @@ void setup(){
 
 void loop(){
   for (size_t i = 0; i < 360; i++) {
-    stepperH.rotate(1)
-    stepperV.rotate(1)
+    stepperH.rotate(1);
+    stepperV.rotate(1);
   }
   Serial.println(analogRead(17));
 
