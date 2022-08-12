@@ -12,7 +12,7 @@ int rotationCamera = 1;
 
 void setup(){
   //Steppermotorsetup
-  stepperH.enableDriver();
+  stepperCamera.enableDriver();
   Serial.begin(9600);
   stepperCamera.setSpeedRPM(100);
   stepperSlider.setSpeedRPM(100);
