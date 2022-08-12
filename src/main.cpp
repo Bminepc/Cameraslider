@@ -1,7 +1,7 @@
 #include <AH_EasyDriver.h>
 
 #define TasterLeft 19
-#define TasterRight
+#define TasterRight 18
 
 AH_EasyDriver stepperCamera(200,14,12,27,26,28);
 AH_EasyDriver stepperSlider(200,32,33,27,26,28);
