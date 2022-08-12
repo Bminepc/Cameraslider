@@ -1,6 +1,6 @@
 #include <AH_EasyDriver.h>
 
-#define TasterH 12
+#define TasterH 19
 
 AH_EasyDriver stepperH(200,14,12,27,26,28);
 AH_EasyDriver stepperV(200,32,33,27,26,28);
