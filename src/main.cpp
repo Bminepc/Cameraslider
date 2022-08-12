@@ -12,12 +12,14 @@ void setup(){
   Serial.begin(9600);
   stepperH.setSpeedRPM(100);
   stepperV.setSpeedRPM(100);
+  pinMode(TasterH, INPUT);
 }
 
 void loop(){
   for (size_t i = 0; i < 360; i++) {
+    if(digitalRead(TasterH) != HIGH){
     stepperH.rotate(1);
     stepperV.rotate(1);
+    }
   }
-  delay(100);
 }
