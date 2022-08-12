@@ -31,15 +31,16 @@ void loop(){
       direction = -1;
       afterTurn = 0.1;
     }
-    if(afterTurn < 1){
-      afterTurn = afterTurn + 0.1;
-      Serial.print(afterTurn);
-    }
 
     stepperCamera.setSpeedRPM(100 * afterTurn);
     stepperSlider.setSpeedRPM(100 * afterTurn);
     stepperCamera.rotate(direction * rotationCamera);
     stepperSlider.rotate(direction * rotationSlider);
+
+    if(afterTurn < 1){
+      afterTurn = afterTurn + 0.1;
+      Serial.print(afterTurn);
+    }
 }
 
 
