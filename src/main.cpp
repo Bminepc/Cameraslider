@@ -79,6 +79,11 @@ void setup(){
   pinMode(TasterLeft, INPUT);
   pinMode(TasterRight, INPUT);
 
+  //Temporary
+  Serial.println("Start");
+  stepperSlider.rotate(1);
+  Serial.println("End");
+
   detectBounds();
 }
 
