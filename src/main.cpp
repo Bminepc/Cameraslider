@@ -47,6 +47,20 @@ void detectBounds(){
   Serial.println(millisToEnd);
 }
 
+void driveLeft(){
+  while (digitalRead(TasterLeft) != HIGH) {
+    stepperSlider.rotate(1);
+  }
+  Serial.println("Moved to left End");
+}
+
+void driveRight(){
+  while (digitalRead(TasterRight) != HIGH) {
+    stepperSlider.rotate(-1);
+  }
+  Serial.println("Moved to right End");
+}
+
 // Function Prototypes
 void webSocketEvent(uint8_t , WStype_t, uint8_t * , size_t );
 void sendResponse();

@@ -12,6 +12,16 @@ var connection = null;
 // Setup EventListener
 document.addEventListener('DOMContentLoaded', function() {
   const stop = document.querySelector("#stop");
+  const slideleft = document.querySelector("#slideleft");
+  const slideright = document.querySelector("#slideright");
+
+  stop.addEventListener("click", function () {
+    sendLED1('STOP');
+  });
+
+  stop.addEventListener("click", function () {
+    sendLED1('STOP');
+  });
 
   stop.addEventListener("click", function () {
     sendLED1('STOP');
@@ -79,6 +89,10 @@ function sendLED1(Value)
     </div>
     <div class="Settings">
       <button name="Stop" class="Emergency" id="stop">STOP</button>
+      <div class="Outerbox">
+        <button class="Movement" id="slideleft">Slide Left</button>
+        <button class="Movement" id="slideright">Slide Right</button>
+      </div>
     </div>
     <div class="Data">
 
