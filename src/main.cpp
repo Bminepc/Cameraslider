@@ -139,7 +139,6 @@ void loop(){
     stepperSlider.rotate(direction * rotationSlider);
     delay(1);
 }else{
-  //Timeoutaction
 }
 }
 
