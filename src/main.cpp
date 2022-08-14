@@ -32,9 +32,11 @@ int millisToEnd = 0; //Time needed to travel from one Side to another in Millise
 //Positiondetection of the Motors
 void detectBounds(){
   millisToEnd = 0;
+  Serial.println("Driving to one End");
   while (digitalRead(TasterLeft) != HIGH) {
     stepperSlider.rotate(1);
   }
+  Serial.println("Driving to other End");
   while (digitalRead(TasterRight) != HIGH) {
     stepperSlider.rotate(-1);
     millisToEnd++;
