@@ -20,13 +20,29 @@ bool con = false;                                  // Connection state of WebSoc
 AH_EasyDriver stepperCamera(200,14,12,27,26,28);
 AH_EasyDriver stepperSlider(200,32,33,27,26,28);
 
-int direction = 1;
-int nextDirection = 1;
-int rotationSlider = 5;
-int rotationCamera = 1;
-float speedFactor = 1;
-boolean hit = false;
-int Timeout = 0;
+int direction = 1; //Direction of Turning. Reversed at every End
+int nextDirection = 1; //Temporary direction. Only used while deacelerating
+int rotationSlider = 5; //Some Speed Modifier
+int rotationCamera = 1; //Some Speed Modifier
+float speedFactor = 1; //Factor for Acceleration and deacceleration
+boolean hit = false; //Shows if endswitch was hit and Device is deacelerating
+int Timeout = 0; //Simple Network Timeout for some ... random ... time
+int millisToEnd = 0; //Time needed to travel from one Side to another in Milliseconds
+
+//Positiondetection of the Motors
+void detectDistance(){
+  millisToEnd = 0;
+  while (digitalRead(TasterLeft) != HIGH) {
+    stepperSlider.rotate(1);
+  }
+  while (digitalRead(TasterRight) != HIGH) {
+    stepperSlider.rotate(-1);
+    millisToEnd++;
+    delay(1);
+  }
+  Serial.println("Time in Milliseconds from Left to Right:");
+  Serial.println(millisToEnd);
+}
 
 // Function Prototypes
 void webSocketEvent(uint8_t , WStype_t, uint8_t * , size_t );
@@ -64,7 +80,8 @@ void setup(){
 
 void loop(){
   webSocket.loop();
-  if(Timeout > 1){
+  Serial.println(Timeout);
+  if(Timeout < 1){
     if(digitalRead(TasterLeft) == HIGH){
       hit = true;
       nextDirection = 1;
