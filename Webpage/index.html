@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
     sendLED1('STOP');
   });
 
-  stop.addEventListener("click", function () {
-    sendLED1('STOP');
+  slideleft.addEventListener("click", function () {
+    sendLED1('slideleft');
   });
 
-  stop.addEventListener("click", function () {
-    sendLED1('STOP');
+  slideright.addEventListener("click", function () {
+    sendLED1('slideright');
   });
 
   start();
@@ -76,7 +76,7 @@ function sendLED1(Value)
   // Construct a msg object containing the data the server needs to process the message from the client.
   var msg = { };
   msg.action = "request";
-  msg.stop = Value;   // State of the LED
+  msg.wanted = Value;
   connection.send(JSON.stringify(msg));
 }
 </script>

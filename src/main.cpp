@@ -157,13 +157,15 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
       deserializeJson(doc, (char *) payload);
 
       if (doc["action"] == "request") {
-        if(!doc["stop"].isNull()) Timeout = Timeout * -1;
-        /*
-        if (!doc["dreh"].isNull()) Value = doc["dreh"];
-        if (!doc["LED1"].isNull())
-          setLED1(doc["LED1"]);
-        bChange = true;
-        */
+        if(!doc["wanted"].isNull()){
+          if(doc["wanted"] == "STOP"){
+            Timeout = Timeout * -1;
+          }else if(doc["wanted"] == "slideleft"){
+            driveLeft();
+          }else if(doc["wanted"] == "slideright"){
+            driveRight();
+          }
+        }
       }
 
       //webSocket.sendTXT(num, payload, lenght);
