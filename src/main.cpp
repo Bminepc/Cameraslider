@@ -30,7 +30,7 @@ int Timeout = 0; //Simple Network Timeout for some ... random ... time
 int millisToEnd = 0; //Time needed to travel from one Side to another in Milliseconds
 
 //Positiondetection of the Motors
-void detectDistance(){
+void detectBounds(){
   millisToEnd = 0;
   while (digitalRead(TasterLeft) != HIGH) {
     stepperSlider.rotate(1);
@@ -76,6 +76,8 @@ void setup(){
   //Endtaster
   pinMode(TasterLeft, INPUT);
   pinMode(TasterRight, INPUT);
+
+  detectBounds();
 }
 
 void loop(){
