@@ -175,8 +175,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
           }else if(doc["wanted"] == "slideright"){
             driveRight();
           }else if(doc["wanted"] == "startSettings"){
-            if(stateOfSlider == 1) stateOfSlider = 2;
-            if(stateOfSlider == 2) stateOfSlider = 1;
+            if(stateOfSlider == 1) stateOfSlider = 2; else stateOfSlider = 1;
+            Serial.println(stateOfSlider);
           }
         }
       }
