@@ -115,7 +115,7 @@ void setup(){
 
 void loop(){
   webSocket.loop();
-  if(Timeout == 1){
+  if(Timeout == 1 && stateOfSlider == 2){
     if(digitalRead(TasterLeft) == HIGH){
       hit = true;
       nextDirection = 1;
