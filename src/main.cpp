@@ -26,7 +26,7 @@ int rotationSlider = 5; //Some Speed Modifier
 int rotationCamera = 1; //Some Speed Modifier
 float speedFactor = 1; //Factor for Acceleration and deacceleration
 boolean hit = false; //Shows if endswitch was hit and Device is deacelerating
-int Timeout = 0; //Simple Network Timeout for some ... random ... time
+int Timeout = 1; //Simple Network Timeout 1 = Not Timeouted -1 = Timeouted
 int millisToEnd = 0; //Time needed to travel from one Side to another in Milliseconds
 
 //Positiondetection of the Motors
@@ -42,6 +42,7 @@ void detectBounds(){
     millisToEnd++;
     delay(1);
   }
+  millisToEnd = millisToEnd * 2; //Correct some... well... bullshit...
   Serial.println("Time in Milliseconds from Left to Right:");
   Serial.println(millisToEnd);
 }
@@ -89,7 +90,7 @@ void setup(){
 
 void loop(){
   webSocket.loop();
-  if(Timeout < 1){
+  if(Timeout == 1){
     if(digitalRead(TasterLeft) == HIGH){
       hit = true;
       nextDirection = 1;
@@ -113,7 +114,7 @@ void loop(){
     stepperSlider.rotate(direction * rotationSlider);
     delay(1);
 }else{
-  Timeout--;
+  //Timeoutaction
 }
 }
 
@@ -142,7 +143,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
       deserializeJson(doc, (char *) payload);
 
       if (doc["action"] == "request") {
-        if(!doc["stop"].isNull()) Timeout = 1000;
+        if(!doc["stop"].isNull()) Timeout = Timeout * -1;
         /*
         if (!doc["dreh"].isNull()) Value = doc["dreh"];
         if (!doc["LED1"].isNull())
