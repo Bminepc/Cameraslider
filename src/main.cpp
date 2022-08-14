@@ -28,6 +28,7 @@ float speedFactor = 1; //Factor for Acceleration and deacceleration
 boolean hit = false; //Shows if endswitch was hit and Device is deacelerating
 int Timeout = 1; //Simple Network Timeout 1 = Not Timeouted -1 = Timeouted
 int millisToEnd = 0; //Time needed to travel from one Side to another in Milliseconds
+int stateOfSlider = 0; //-1 = Errorstate 0 = Startup 1 = Setting 2 = Running
 
 //Positiondetection of the Motors
 void detectBounds(){
@@ -48,17 +49,25 @@ void detectBounds(){
 }
 
 void driveLeft(){
-  while (digitalRead(TasterLeft) != HIGH) {
-    stepperSlider.rotate(1);
+  if (stateOfSlider == 1) {
+    while (digitalRead(TasterLeft) != HIGH) {
+      stepperSlider.rotate(1);
+    }
+    Serial.println("Moved to left End");
+  }else{
+    Serial.println("Wrong Mode");
   }
-  Serial.println("Moved to left End");
 }
 
 void driveRight(){
-  while (digitalRead(TasterRight) != HIGH) {
-    stepperSlider.rotate(-1);
+  if (stateOfSlider == 1) {
+    while (digitalRead(TasterRight) != HIGH) {
+      stepperSlider.rotate(-1);
+    }
+    Serial.println("Moved to right End");
+  }else{
+    Serial.println("Wrong Mode");
   }
-  Serial.println("Moved to right End");
 }
 
 // Function Prototypes
@@ -99,7 +108,9 @@ void setup(){
   stepperSlider.rotate(1);
   Serial.println("End");
 
-  detectBounds();
+  //TODO Wieder einfügen
+  //detectBounds();
+  stateOfSlider = 2;
 }
 
 void loop(){
@@ -164,6 +175,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
             driveLeft();
           }else if(doc["wanted"] == "slideright"){
             driveRight();
+          }else if(doc["wanted"] == "startSettings"){
+            if(stateOfSlider == 1) stateOfSlider = 2;
+            if(stateOfSlider == 2) stateOfSlider = 1;
           }
         }
       }

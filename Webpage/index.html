@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const stop = document.querySelector("#stop");
   const slideleft = document.querySelector("#slideleft");
   const slideright = document.querySelector("#slideright");
+  const startSettings = document.querySelector("#startSettings");
 
   stop.addEventListener("click", function () {
     sendLED1('STOP');
@@ -25,6 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   slideright.addEventListener("click", function () {
     sendLED1('slideright');
+  });
+
+  startSettings.addEventListener("click", function () {
+    sendLED1('startSettings');
   });
 
   start();
@@ -93,6 +98,7 @@ function sendLED1(Value)
         <button class="Movement" id="slideleft">Slide Left</button>
         <button class="Movement" id="slideright">Slide Right</button>
       </div>
+      <button class="General" id="startSettings">Start or end Settingsmode</button>
     </div>
     <div class="Data">
 

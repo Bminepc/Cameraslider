@@ -30,9 +30,24 @@ const char html[] PROGMEM = R"=====(
   // Setup EventListener
   document.addEventListener('DOMContentLoaded', function() {
     const stop = document.querySelector("#stop");
+    const slideleft = document.querySelector("#slideleft");
+    const slideright = document.querySelector("#slideright");
+    const startSettings = document.querySelector("#startSettings");
 
     stop.addEventListener("click", function () {
       sendLED1('STOP');
+    });
+
+    slideleft.addEventListener("click", function () {
+      sendLED1('slideleft');
+    });
+
+    slideright.addEventListener("click", function () {
+      sendLED1('slideright');
+    });
+
+    startSettings.addEventListener("click", function () {
+      sendLED1('startSettings');
     });
 
     start();
@@ -84,7 +99,7 @@ const char html[] PROGMEM = R"=====(
     // Construct a msg object containing the data the server needs to process the message from the client.
     var msg = { };
     msg.action = "request";
-    msg.stop = Value;   // State of the LED
+    msg.wanted = Value;
     connection.send(JSON.stringify(msg));
   }
   </script>
@@ -97,6 +112,11 @@ const char html[] PROGMEM = R"=====(
       </div>
       <div class="Settings">
         <button name="Stop" class="Emergency" id="stop">STOP</button>
+        <div class="Outerbox">
+          <button class="Movement" id="slideleft">Slide Left</button>
+          <button class="Movement" id="slideright">Slide Right</button>
+        </div>
+        <button class="General" id="startSettings">Start or end Settingsmode</button>
       </div>
       <div class="Data">
 
