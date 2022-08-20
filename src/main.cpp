@@ -40,11 +40,11 @@ int side = -1; //Used in Settingsmode (1 = Left; 0 = Right)
 //Positiondetection of the Motors
 void detectBounds(){
   millisToEnd = 0;
-  Serial.println("Driving to one End");
+  Serial.println("Driving to Left End");
   while (digitalRead(TasterLeft) != HIGH) {
     stepperSlider.rotate(1);
   }
-  Serial.println("Driving to other End");
+  Serial.println("Driving to Right End");
   while (digitalRead(TasterRight) != HIGH) {
     stepperSlider.rotate(-1);
     millisToEnd++;
