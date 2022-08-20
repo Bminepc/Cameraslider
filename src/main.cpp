@@ -35,6 +35,8 @@ int stateOfSlider = 0; //-1 = Errorstate 0 = Startup 1 = Setting 2 = Running
 int angleLeft = 0;
 int angleRight = 0;
 int side = -1; //Used in Settingsmode (1 = Left; 0 = Right)
+int numberOfSteps = 0; //The Number of Cycles the Camera turn must timeout to get the right rotation
+int numberOfStepsCountdown = 0;
 
 
 //Positiondetection of the Motors
@@ -103,6 +105,14 @@ void turnRight(){
 void webSocketEvent(uint8_t , WStype_t, uint8_t * , size_t );
 void sendResponse();
 
+void endSettings(){
+  if(angleLeft-angleRight != 0){
+    numberOfSteps = millisToEnd/((angleLeft-angleRight)<0 ? ((angleLeft-angleRight) * -1) : (angleLeft-angleRight));
+  }else{
+    numberOfSteps = 0;
+  }
+}
+
 void setup(){
   Serial.begin(115200);
   // WiFi Station initialisation
@@ -141,6 +151,7 @@ void setup(){
   stateOfSlider = 2;
 }
 
+
 void loop(){
   webSocket.loop();
   if(Timeout == 1 && stateOfSlider == 2){
@@ -160,10 +171,14 @@ void loop(){
       speedFactor = speedFactor + 0.005;
     }
 
-    rotationCamera = (angleLeft - angleRight)/millisToEnd;
-    stepperCamera.setSpeedRPM(speedOfCamera * speedFactor);
+    if(numberOfStepsCountdown == numberOfSteps){
+      stepperCamera.rotate(direction * rotationCamera);
+      stepperCamera.setSpeedRPM(speedOfCamera * speedFactor);
+      numberOfStepsCountdown = 1;
+    }else{
+      numberOfStepsCountdown++;
+    }
     stepperSlider.setSpeedRPM(speedOfSlider * speedFactor);
-    stepperCamera.rotate(direction * rotationCamera);
     stepperSlider.rotate(direction * rotationSlider);
     delay(1);
 }else{
@@ -203,7 +218,10 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
           }else if(doc["wanted"] == "slideright"){
             driveRight();
           }else if(doc["wanted"] == "startSettings"){
-            if(stateOfSlider == 1)stateOfSlider = 2; else {
+            if(stateOfSlider == 1){
+              stateOfSlider = 2;
+              endSettings();
+            }else {
               stateOfSlider = 1;
               driveRight();
             };
