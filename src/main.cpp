@@ -20,6 +20,8 @@ bool con = false;                                  // Connection state of WebSoc
 AH_EasyDriver stepperCamera(200,14,12,27,26,28);
 AH_EasyDriver stepperSlider(200,32,33,27,26,28);
 
+int speedOfCamera = 100;
+int speedOfSlider = 100;
 int direction = 1; //Direction of Turning. Reversed at every End
 int nextDirection = 1; //Temporary direction. Only used while deacelerating
 int rotationSlider = 5; //Some Speed Modifier
@@ -164,8 +166,8 @@ void loop(){
     }
 
     rotationCamera = (angleLeft - angleRight)/millisToEnd;
-    stepperCamera.setSpeedRPM(100 * speedFactor);
-    stepperSlider.setSpeedRPM(100 * speedFactor);
+    stepperCamera.setSpeedRPM(speedOfCamera * speedFactor);
+    stepperSlider.setSpeedRPM(speedOfSlider * speedFactor);
     stepperCamera.rotate(direction * rotationCamera);
     stepperSlider.rotate(direction * rotationSlider);
     delay(1);
