@@ -158,9 +158,11 @@ void loop(){
     if(digitalRead(TasterLeft) == HIGH){
       hit = true;
       nextDirection = 1;
+      Serial.println("Taster Links");
     }else if(digitalRead(TasterRight) == HIGH){
       hit = true;
       nextDirection = -1;
+      Serial.println("Taster Rechts");
     }
     if(hit && speedFactor >= 0.1){
       speedFactor = speedFactor - 0.005;
@@ -177,6 +179,7 @@ void loop(){
       numberOfStepsCountdown = 1;
     }else{
       numberOfStepsCountdown++;
+      Serial.println(numberOfStepsCountdown);
     }
     stepperSlider.setSpeedRPM(speedOfSlider * speedFactor);
     stepperSlider.rotate(direction * rotationSlider);
