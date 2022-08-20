@@ -81,7 +81,7 @@ void driveRight(){
 
 void turnLeft(){
   if (stateOfSlider == 1) {
-      stepperCamera.rotate(-1);
+      stepperCamera.rotate(1);
     Serial.println("Turned Left");
     if(side == 1) angleLeft--; else angleRight--;
   }else{
@@ -91,7 +91,7 @@ void turnLeft(){
 
 void turnRight(){
   if (stateOfSlider == 1) {
-      stepperCamera.rotate(1);
+      stepperCamera.rotate(-1);
     Serial.println("Turned Right");
     if(side == 1) angleLeft++; else angleRight++;
   }else{
