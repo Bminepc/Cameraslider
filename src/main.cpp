@@ -70,6 +70,28 @@ void driveRight(){
   }
 }
 
+void turnLeft(){
+  if (stateOfSlider == 1) {
+    while (digitalRead(TasterRight) != HIGH) {
+      stepperCamera.rotate(-1);
+    }
+    Serial.println("Turned Left");
+  }else{
+    Serial.println("Wrong Mode");
+  }
+}
+
+void turnRight(){
+  if (stateOfSlider == 1) {
+    while (digitalRead(TasterRight) != HIGH) {
+      stepperCamera.rotate(1);
+    }
+    Serial.println("Turned Right");
+  }else{
+    Serial.println("Wrong Mode");
+  }
+}
+
 // Function Prototypes
 void webSocketEvent(uint8_t , WStype_t, uint8_t * , size_t );
 void sendResponse();
@@ -177,6 +199,10 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
           }else if(doc["wanted"] == "startSettings"){
             if(stateOfSlider == 1) stateOfSlider = 2; else stateOfSlider = 1;
             Serial.println(stateOfSlider);
+          }else if(doc["wanted"] == "turnLeft"){
+            turnLeft();
+          }else if(doc["wanted"] == "turnRight"){
+            turnRight();
           }
         }
       }

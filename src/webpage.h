@@ -33,6 +33,8 @@ const char html[] PROGMEM = R"=====(
     const slideleft = document.querySelector("#slideleft");
     const slideright = document.querySelector("#slideright");
     const startSettings = document.querySelector("#startSettings");
+    const turnRight = document.querySelector("#turnRight");
+    const turnLeft = document.querySelector("#turnLeft");
 
     stop.addEventListener("click", function () {
       sendLED1('STOP');
@@ -48,6 +50,14 @@ const char html[] PROGMEM = R"=====(
 
     startSettings.addEventListener("click", function () {
       sendLED1('startSettings');
+    });
+
+    turnLeft.addEventListener("click", function () {
+      sendLED1('turnLeft');
+    });
+
+    turnRight.addEventListener("click", function () {
+      sendLED1('turnRight');
     });
 
     start();
@@ -115,6 +125,11 @@ const char html[] PROGMEM = R"=====(
         <div class="Outerbox">
           <button class="Movement" id="slideleft">Slide Left</button>
           <button class="Movement" id="slideright">Slide Right</button>
+        </div>
+        <hr>
+        <div class="Outerbox">
+          <button class="Movement" id="turnLeft">Turn Left</button>
+          <button class="Movement" id="turnRight">Turn Right</button>
         </div>
         <button class="General" id="startSettings">Start or end Settingsmode</button>
       </div>
