@@ -141,8 +141,7 @@ void setup(){
   stepperSlider.rotate(1);
   Serial.println("End");
 
-  //TODO Wieder einfügen
-  //detectBounds();
+  detectBounds();
   stateOfSlider = 2;
 }
 
