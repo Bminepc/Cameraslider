@@ -173,7 +173,7 @@ void loop(){
       speedFactor = speedFactor + 0.005;
     }
 
-    if(numberOfStepsCountdown == numberOfSteps){
+    if(numberOfStepsCountdown >= numberOfSteps){
       stepperCamera.rotate(direction * rotationCamera);
       stepperCamera.setSpeedRPM(speedOfCamera * speedFactor);
       numberOfStepsCountdown = 1;
