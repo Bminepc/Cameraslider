@@ -29,6 +29,11 @@ boolean hit = false; //Shows if endswitch was hit and Device is deacelerating
 int Timeout = 1; //Simple Network Timeout 1 = Not Timeouted -1 = Timeouted
 int millisToEnd = 0; //Time needed to travel from one Side to another in Milliseconds
 int stateOfSlider = 0; //-1 = Errorstate 0 = Startup 1 = Setting 2 = Running
+//Start and end position of Cameraangle
+int angleLeft = 0;
+int angleRight = 0;
+int side = -1; //Used in Settingsmode (1 = Left; 0 = Right)
+
 
 //Positiondetection of the Motors
 void detectBounds(){
@@ -54,6 +59,7 @@ void driveLeft(){
       stepperSlider.rotate(1);
     }
     Serial.println("Moved to left End");
+    side = 1;
   }else{
     Serial.println("Wrong Mode");
   }
@@ -65,6 +71,7 @@ void driveRight(){
       stepperSlider.rotate(-1);
     }
     Serial.println("Moved to right End");
+    side = 0;
   }else{
     Serial.println("Wrong Mode");
   }
@@ -76,6 +83,7 @@ void turnLeft(){
       stepperCamera.rotate(-1);
     }
     Serial.println("Turned Left");
+    if(side == 1) angleLeft--; else angleRight--;
   }else{
     Serial.println("Wrong Mode");
   }
@@ -87,6 +95,7 @@ void turnRight(){
       stepperCamera.rotate(1);
     }
     Serial.println("Turned Right");
+    if(side == 1) angleLeft++; else angleRight++;
   }else{
     Serial.println("Wrong Mode");
   }
@@ -154,7 +163,7 @@ void loop(){
       speedFactor = speedFactor + 0.005;
     }
 
-
+    rotationCamera = (angleLeft - angleRight)/millisToEnd;
     stepperCamera.setSpeedRPM(100 * speedFactor);
     stepperSlider.setSpeedRPM(100 * speedFactor);
     stepperCamera.rotate(direction * rotationCamera);
@@ -197,7 +206,10 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
           }else if(doc["wanted"] == "slideright"){
             driveRight();
           }else if(doc["wanted"] == "startSettings"){
-            if(stateOfSlider == 1) stateOfSlider = 2; else stateOfSlider = 1;
+            if(stateOfSlider == 1)stateOfSlider = 2; else {
+              stateOfSlider = 1;
+              driveRight();
+            };
             Serial.println(stateOfSlider);
           }else if(doc["wanted"] == "turnLeft"){
             turnLeft();
