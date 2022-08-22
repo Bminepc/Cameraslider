@@ -17,6 +17,8 @@ Netzwerk
 
 Settingsmode betreten
 
+Rechtes Ende
+
 Beide Enden Anfahren und Einstellen
 
 Settingsmode verlassen

@@ -20,6 +20,7 @@ bool con = false;                                  // Connection state of WebSoc
 AH_EasyDriver stepperCamera(200,14,12,27,26,28);
 AH_EasyDriver stepperSlider(200,32,33,27,26,28);
 
+int directionMod = -1;
 int speedOfCamera = 100;
 int speedOfSlider = 100;
 int direction = 1; //Direction of Turning. Reversed at every End
@@ -177,7 +178,7 @@ void loop(){
       Serial.println(numberOfStepsCountdown);
     }
     stepperSlider.setSpeedRPM(speedOfSlider * speedFactor);
-    stepperSlider.rotate(direction * rotationSlider);
+    stepperSlider.rotate(direction * rotationSlider * directionMod);
     delay(1);
 }else{
 }
